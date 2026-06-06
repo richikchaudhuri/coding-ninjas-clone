@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Logo from './Logo.jsx'
 
 const linkGroups = [
   {
@@ -56,9 +57,7 @@ export default function Footer() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <Link to="/" className="text-xl font-extrabold text-cn-orange">
-              Coding Ninjas
-            </Link>
+            <Logo light />
             <p className="mt-3 text-sm leading-relaxed">
               Learn. Build. Get hired. Your one-stop destination for mastering
               tech skills and launching your career.

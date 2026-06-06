@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import Logo from './Logo.jsx'
 
 const navLinks = [
   { label: 'Courses', to: '/courses' },
@@ -48,12 +49,7 @@ export default function Navbar() {
           scrolled ? 'h-14' : 'h-16'
         }`}
       >
-        <Link
-          to="/"
-          className="text-xl font-extrabold tracking-tight text-cn-orange"
-        >
-          Coding Ninjas
-        </Link>
+        <Logo />
 
         <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
           {navLinks.map((link) => (
