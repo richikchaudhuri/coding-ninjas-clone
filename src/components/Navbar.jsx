@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
 const navLinks = [
@@ -9,7 +9,26 @@ const navLinks = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const closeMenu = () => setMenuOpen(false)
+
+  // Elevate / condense the bar once the page is scrolled a touch.
+  useEffect(() => {
+    let frame = 0
+    const update = () => {
+      frame = 0
+      setScrolled(window.scrollY > 8)
+    }
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      cancelAnimationFrame(frame)
+    }
+  }, [])
 
   const linkClass = ({ isActive }) =>
     `transition-colors hover:text-cn-orange ${
@@ -17,8 +36,18 @@ export default function Navbar() {
     }`
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-container items-center justify-between px-4">
+    <header
+      className={`sticky top-0 z-50 border-b backdrop-blur-md transition-all duration-300 ${
+        scrolled
+          ? 'border-gray-200 bg-white/95 shadow-sm'
+          : 'border-transparent bg-white/80'
+      }`}
+    >
+      <div
+        className={`mx-auto flex max-w-container items-center justify-between px-4 transition-all duration-300 ${
+          scrolled ? 'h-14' : 'h-16'
+        }`}
+      >
         <Link
           to="/"
           className="text-xl font-extrabold tracking-tight text-cn-orange"
