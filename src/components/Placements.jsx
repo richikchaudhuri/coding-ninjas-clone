@@ -1,3 +1,5 @@
+import Reveal from './Reveal.jsx'
+
 const companies = [
   "Google",
   "Amazon",
@@ -19,9 +21,11 @@ export default function Placements() {
   return (
     <section id="placements" className="bg-black text-white py-20">
       <div className="mx-auto max-w-container px-4">
-        <h2 className="text-center text-3xl md:text-4xl font-extrabold mb-12">
-          Our Learners Work At
-        </h2>
+        <Reveal>
+          <h2 className="text-center text-3xl md:text-4xl font-extrabold mb-12">
+            Our Learners Work At
+          </h2>
+        </Reveal>
 
         <div className="grid grid-cols-2 sm:grid-cols-4">
           {companies.map((name, i) => {
@@ -48,7 +52,7 @@ export default function Placements() {
           })}
         </div>
 
-        <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16">
+        <Reveal className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <p className="text-3xl md:text-4xl font-bold text-cn-orange">
@@ -57,7 +61,7 @@ export default function Placements() {
               <p className="mt-1 text-sm text-white/70">{stat.label}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );
