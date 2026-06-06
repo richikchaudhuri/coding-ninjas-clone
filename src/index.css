@@ -4,8 +4,40 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   @apply bg-white text-cn-dark font-sans antialiased;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply font-sans tracking-tight;
+}
+
+/* Consistent keyboard-focus ring across the app */
+:focus-visible {
+  outline: 2px solid theme('colors.cn.orange');
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: theme('colors.cn.orange');
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
