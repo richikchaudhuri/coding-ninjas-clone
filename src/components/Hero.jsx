@@ -11,7 +11,7 @@ export default function Hero() {
   return (
     <section id="hero" className="relative overflow-hidden bg-cn-dark text-white">
       <div className="relative z-10 mx-auto grid max-w-container gap-10 px-4 py-20 md:grid-cols-2 md:items-center md:gap-12 md:py-28 lg:py-32">
-        <div>
+        <div className="animate-fade-up">
           <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
             Get the career you
             <br />
@@ -69,7 +69,7 @@ export default function Hero() {
             aria-hidden="true"
           />
 
-          <div className="relative flex h-56 w-56 flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-2xl backdrop-blur-md sm:h-64 sm:w-64">
+          <div className="relative flex h-56 w-56 flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-2xl backdrop-blur-md animate-float sm:h-64 sm:w-64">
             <span className="text-5xl font-bold text-cn-orange">&lt;/&gt;</span>
             <span className="mt-3 text-sm font-medium text-gray-400">
               Start Coding
