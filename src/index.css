@@ -16,7 +16,9 @@ body {
 h1,
 h2,
 h3 {
-  @apply font-display;
+  /* Plain font-family (not @apply font-display) so it never depends on the
+     JIT having reloaded tailwind.config.js — robust across dev-server restarts. */
+  font-family: 'Bricolage Grotesque', 'Inter Variable', system-ui, sans-serif;
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
