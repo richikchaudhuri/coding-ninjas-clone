@@ -1,42 +1,59 @@
-import { useState } from 'react';
+import { useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
-const navLinks = ['Courses', 'Practice', 'Compete', 'Mentor'];
+const navLinks = [
+  { label: 'Courses', to: '/courses' },
+  { label: 'Pricing', to: '/pricing' },
+  { label: 'About', to: '/about' },
+]
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false)
+  const closeMenu = () => setMenuOpen(false)
+
+  const linkClass = ({ isActive }) =>
+    `transition-colors hover:text-cn-orange ${
+      isActive ? 'text-cn-orange' : 'text-cn-dark'
+    }`
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-container items-center justify-between px-4">
-        <span className="text-xl font-extrabold tracking-tight text-cn-orange">
+        <Link
+          to="/"
+          className="text-xl font-extrabold tracking-tight text-cn-orange"
+        >
           Coding Ninjas
-        </span>
+        </Link>
 
-        <nav className="hidden items-center gap-8 text-sm font-medium text-cn-dark md:flex">
+        <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
           {navLinks.map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              className="transition-colors hover:text-cn-orange"
-            >
-              {link}
-            </a>
+            <NavLink key={link.to} to={link.to} className={linkClass}>
+              {link.label}
+            </NavLink>
           ))}
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <button className="rounded-md px-4 py-2 text-sm font-semibold text-cn-dark transition-colors hover:text-cn-orange">
+          <Link
+            to="/login"
+            className="rounded-md px-4 py-2 text-sm font-semibold text-cn-dark transition-colors hover:text-cn-orange"
+          >
             Login
-          </button>
-          <button className="rounded-md bg-cn-orange px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600">
+          </Link>
+          <Link
+            to="/signup"
+            className="rounded-md bg-cn-orange px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+          >
             Sign Up
-          </button>
+          </Link>
         </div>
 
         <button
           className="flex flex-col items-center justify-center gap-1.5 md:hidden"
           onClick={() => setMenuOpen((prev) => !prev)}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
         >
           <span
             className={`block h-0.5 w-6 bg-cn-dark transition-transform ${menuOpen ? 'translate-y-2 rotate-45' : ''}`}
@@ -54,26 +71,39 @@ export default function Navbar() {
         <nav className="border-t border-gray-100 bg-white px-4 pb-4 md:hidden">
           <ul className="flex flex-col gap-2 pt-2">
             {navLinks.map((link) => (
-              <li key={link}>
-                <a
-                  href={`#${link.toLowerCase()}`}
-                  className="block rounded-md px-3 py-2 text-sm font-medium text-cn-dark transition-colors hover:bg-gray-50 hover:text-cn-orange"
+              <li key={link.to}>
+                <NavLink
+                  to={link.to}
+                  onClick={closeMenu}
+                  className={({ isActive }) =>
+                    `block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-50 hover:text-cn-orange ${
+                      isActive ? 'text-cn-orange' : 'text-cn-dark'
+                    }`
+                  }
                 >
-                  {link}
-                </a>
+                  {link.label}
+                </NavLink>
               </li>
             ))}
           </ul>
           <div className="mt-3 flex flex-col gap-2">
-            <button className="rounded-md border border-gray-200 px-4 py-2 text-sm font-semibold text-cn-dark transition-colors hover:text-cn-orange">
+            <Link
+              to="/login"
+              onClick={closeMenu}
+              className="rounded-md border border-gray-200 px-4 py-2 text-center text-sm font-semibold text-cn-dark transition-colors hover:text-cn-orange"
+            >
               Login
-            </button>
-            <button className="rounded-md bg-cn-orange px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600">
+            </Link>
+            <Link
+              to="/signup"
+              onClick={closeMenu}
+              className="rounded-md bg-cn-orange px-4 py-2 text-center text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+            >
               Sign Up
-            </button>
+            </Link>
           </div>
         </nav>
       )}
     </header>
-  );
+  )
 }
