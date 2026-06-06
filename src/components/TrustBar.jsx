@@ -1,18 +1,28 @@
-// Stub for /batch: replicate the stats / trust strip (learners, ratings, hiring partners).
 export default function TrustBar() {
   const stats = [
     { value: '1M+', label: 'Learners' },
-    { value: '1400+', label: 'Hiring partners' },
-    { value: '4.8/5', label: 'Average rating' },
+    { value: '1400+', label: 'Hiring Partners' },
+    { value: '4.8/5', label: 'Average Rating' },
     { value: '50+', label: 'Courses' },
   ]
+
   return (
-    <section className="border-b border-gray-200 bg-cn-orange/5">
-      <div className="mx-auto grid max-w-container grid-cols-2 gap-6 px-4 py-10 md:grid-cols-4">
-        {stats.map((s) => (
-          <div key={s.label} className="text-center">
-            <div className="text-3xl font-extrabold text-cn-dark">{s.value}</div>
-            <div className="text-sm text-cn-gray">{s.label}</div>
+    <section className="bg-cn-orange/5 py-8 md:py-12">
+      <div className="mx-auto grid max-w-container grid-cols-2 gap-y-8 px-4 md:grid-cols-4">
+        {stats.map((s, i) => (
+          <div
+            key={s.label}
+            className={[
+              'text-center',
+              i < stats.length - 1 && 'md:border-r md:border-gray-200',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+          >
+            <p className="text-3xl font-bold text-cn-orange md:text-4xl">
+              {s.value}
+            </p>
+            <p className="mt-1 text-sm text-cn-gray">{s.label}</p>
           </div>
         ))}
       </div>
