@@ -1,4 +1,6 @@
 import Reveal from './Reveal.jsx'
+import Marquee from './Marquee.jsx'
+import CountUp from './CountUp.jsx'
 
 const companies = [
   "Google",
@@ -12,9 +14,9 @@ const companies = [
 ];
 
 const stats = [
-  { value: "10,000+", label: "Placed" },
-  { value: "500+", label: "Companies" },
-  { value: "\u20B925 LPA", label: "Average CTC" },
+  { end: 10000, suffix: "+", label: "Placed" },
+  { end: 500, suffix: "+", label: "Companies" },
+  { prefix: "\u20B9", end: 25, suffix: " LPA", label: "Average CTC" },
 ];
 
 export default function Placements() {
@@ -27,36 +29,22 @@ export default function Placements() {
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4">
-          {companies.map((name, i) => {
-            const isTopRow = i < 4;
-            const isLeftEdge = i % 4 === 0;
-            return (
-              <div
-                key={name}
-                className={[
-                  "flex h-24 items-center justify-center border border-white/10",
-                  // collapse shared borders
-                  !isTopRow && "-mt-px",
-                  !isLeftEdge && "sm:-ml-px",
-                  i % 2 !== 0 && "max-sm:-ml-px",
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-              >
-                <span className="text-base font-semibold tracking-wide text-white/90">
-                  {name}
-                </span>
-              </div>
-            );
-          })}
-        </div>
+        <Marquee className="[mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+          {companies.map((name) => (
+            <span
+              key={name}
+              className="mx-3 inline-flex h-14 shrink-0 items-center whitespace-nowrap rounded-xl border border-white/10 bg-white/5 px-8 text-lg font-semibold tracking-wide text-white/80 transition-colors hover:border-cn-orange/40 hover:text-white"
+            >
+              {name}
+            </span>
+          ))}
+        </Marquee>
 
         <Reveal className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <p className="text-3xl md:text-4xl font-bold text-cn-orange">
-                {stat.value}
+                <CountUp prefix={stat.prefix} end={stat.end} suffix={stat.suffix} />
               </p>
               <p className="mt-1 text-sm text-white/70">{stat.label}</p>
             </div>
